@@ -8,7 +8,6 @@ import Comment from './comment';
 const PostView = () => {
   const { id } = useParams();
   const [post, setPost] = useState(null);
-  const [comments, setComments] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -29,25 +28,7 @@ const PostView = () => {
     fetchPost();
   }, [id]);
 
-  useEffect(() => {
-    const fetchComments = async () => {
-      const { data, error } = await supabase
-        .from('comments')
-        .select('*')
-        .eq('post_id', id);
-
-      if (error) {
-        console.error('Error fetching comments:', error);
-      } else {
-        setComments(data);
-      }
-    };
-
-    fetchComments();
-
-    const subscription = supabase
-    
-  }, [id]);
+  
 
   const incrementUpvotes = async () => {
     const { error } = await supabase
@@ -93,11 +74,7 @@ const PostView = () => {
         <Card.Text>Created at: {new Date(post.created_at).toLocaleString()}</Card.Text>
         <br />
         <Card.Text >Comments: </Card.Text>
-        {comments.map((comment) => (
-            <div key={comment.id}>
-            <p>{comment.content}</p>
-            </div>
-        ))}
+        
         <Comment postId={id} />
         <br/>
         <Button variant="primary" onClick={incrementUpvotes}>Upvote!</Button>
