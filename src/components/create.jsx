@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { supabase } from '../client'; // Adjust the path according to your project structure
+import { supabase } from '../client'; 
 import { Navbar, Form, Button } from 'react-bootstrap';
 
 
