@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { supabase } from '../client'
-import { Navbar, Nav, Form, FormControl, Card, Button } from 'react-bootstrap';
+import { Navbar, Card, Button } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 
 const PostView = () => {
   const { id } = useParams();
   const [post, setPost] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -39,27 +40,44 @@ const PostView = () => {
     }
   };
 
+  const handleDelete = async () => {
+    const { error } = await supabase
+      .from('posts')
+      .delete()
+      .eq('id', id);
+  
+    if (error) {
+      console.error('Error deleting post:', error);
+    } else {
+      navigate('/');
+    }
+  };
+
   if (!post) {
     return <div>Loading...</div>;
   }
 
   return (
     <div>
-    <Navbar bg="light" expand="lg" className="justify-content-between">
-        <Navbar.Brand href="/">Musical HotTakes</Navbar.Brand>
-      </Navbar>
-    <Card className='post-card'>
-    <Card.Body>
-      <Card.Title>{post.title}</Card.Title>
-      <Card.Text>{post.contents}</Card.Text>
-      <Card.Text>Upvotes: {post.num_upvotes}</Card.Text>
-      <Card.Text>Created at: {new Date(post.created_at).toLocaleString()}</Card.Text>
-      <Button variant="primary" onClick={incrementUpvotes}>Upvote!</Button>
-      <LinkContainer to={`/posts/${post.id}/edit`}>
-        <Button variant="secondary" className="ml-2">Edit</Button>
-      </LinkContainer>
-    </Card.Body>
-  </Card>
+        <Navbar bg="light" expand="lg" className="justify-content-between">
+            <Navbar.Brand href="/">Musical HotTakes</Navbar.Brand>
+        </Navbar>
+        
+        <Card className='post-card'>
+        <Card.Body>
+        <Card.Title>{post.title}</Card.Title>
+        <Card.Text>{post.contents}</Card.Text>
+        <Card.Text>Upvotes: {post.num_upvotes}</Card.Text>
+        <Card.Text>Created at: {new Date(post.created_at).toLocaleString()}</Card.Text>
+        <Button variant="primary" onClick={incrementUpvotes}>Upvote!</Button>
+        <LinkContainer to={`/posts/${post.id}/edit`}>
+            <Button variant="secondary" className="ml-2">Edit</Button>
+        </LinkContainer>
+        <Button variant="danger" type="button" onClick={handleDelete} className="ml-2">
+            Delete Post
+        </Button>
+        </Card.Body>
+    </Card>
   </div>
   );
 };

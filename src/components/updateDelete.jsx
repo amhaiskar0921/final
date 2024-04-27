@@ -44,21 +44,24 @@ const Edit = () => {
     }
   };
 
+
   return (
     <Form onSubmit={handleSubmit}>
       <Form.Group controlId="title">
         <Form.Label>Title</Form.Label>
-        <Form.Control type="text" value={title} onChange={e => setTitle(e.target.value)} />
+        <Form.Control type="text" value={title} onChange={e => setTitle(e.target.value)} required/>
       </Form.Group>
 
       <Form.Group controlId="contents">
         <Form.Label>Contents</Form.Label>
-        <Form.Control as="textarea" rows={3} value={contents} onChange={e => setContents(e.target.value)} />
+        <Form.Control as="textarea" rows={3} value={contents} onChange={e => setContents(e.target.value)} required/>
       </Form.Group>
 
       <Button variant="primary" type="submit">
         Update Post
       </Button>
+
+      
     </Form>
   );
 };

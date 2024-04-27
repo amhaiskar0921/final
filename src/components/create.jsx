@@ -1,67 +1,54 @@
 import { useState } from 'react';
-import { supabase } from '../client';
-import './create.css';
+import { useNavigate } from 'react-router-dom';
+import { supabase } from '../client'; // Adjust the path according to your project structure
+import { Navbar, Form, Button } from 'react-bootstrap';
 
-function Create() {
-  const [name, setName] = useState('');
-  const [speed, setSpeed] = useState('');
-  const [color, setColor] = useState('');
+
+const Create = () => {
+  const [title, setTitle] = useState('');
+  const [contents, setContents] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     const { data, error } = await supabase
-      .from('crewmateData')
+      .from('posts')
       .insert([
-        { name: name, speed: speed, color: color},
+        { title: title, contents: contents },
       ]);
 
     if (error) {
       console.error('Error: ', error);
     } else {
-      console.log('Crewmate added: ', data);
+      console.log('Post added: ', data);
+      navigate('/'); // navigate to home page after successful creation
     }
   };
 
-  const handleColorChange = (event) => {
-    setColor(event.target.value);
-  };
-
   return (
-    <div className='create-container'>
-      <h1>Create a New Crewmate</h1>
-      <img src="./src/assets/group.png" alt="Group" />
-      <br />
-      <form onSubmit={handleSubmit}>
-        <label>
-          Name:
-          <input type="text" value={name} onChange={e => setName(e.target.value)} required />
-        </label>
-        <label>
-          Speed (mph):
-          <input type="number" value={speed} onChange={e => setSpeed(e.target.value)} required />
-        </label>
-        
-        <fieldset>
-          <legend>Color:</legend>
-          <input type="radio" value="red" checked={color === 'red'} onChange={handleColorChange} />
-          <label>Red</label>
-          <input type="radio" value="yellow" checked={color === 'yellow'} onChange={handleColorChange} />
-          <label>Yellow</label>
-          <input type="radio" value="orange" checked={color === 'orange'} onChange={handleColorChange} />
-          <label>Orange</label>
-          <input type="radio" value="green" checked={color === 'green'} onChange={handleColorChange} />
-          <label>Green</label>
-          <input type="radio" value="blue" checked={color === 'blue'} onChange={handleColorChange} />
-          <label>Blue</label>
-          <input type="radio" value="purple" checked={color === 'purple'} onChange={handleColorChange} />
-          <label>Purple</label>
-      </fieldset>
+    <div>
+      <Navbar bg="light" expand="lg" className="justify-content-between">
+          <Navbar.Brand href="/">Musical HotTakes</Navbar.Brand>
+      </Navbar>
 
-        <button type="submit">Submit</button>
-      </form>
+      <Form onSubmit={handleSubmit}>
+        <Form.Group controlId="title">
+          <Form.Label>Title</Form.Label>
+          <Form.Control type="text" value={title} onChange={e => setTitle(e.target.value)} required />
+        </Form.Group>
+
+        <Form.Group controlId="contents">
+          <Form.Label>Contents</Form.Label>
+          <Form.Control as="textarea" rows={3} value={contents} onChange={e => setContents(e.target.value)} required />
+        </Form.Group>
+
+        <Button variant="primary" type="submit">
+          Create Post
+        </Button>
+      </Form>
     </div>
   );
-}
+};
 
 export default Create;
