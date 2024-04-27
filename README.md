@@ -1,8 +1,8 @@
-# Web Development Final Project - *Name of App Here*
+# Web Development Final Project - *Musical HotTakes*
 
-Submitted by: **Your Name Here**
+Submitted by: **Arya Mhaiskar**
 
-This web app: **insert description**
+This web app: **Share your musical hot takes!**
 
 Time spent: **8** hours spent in total
 
