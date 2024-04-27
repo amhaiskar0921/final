@@ -40,7 +40,6 @@ const Comment = ({ postId }) => {
 
     fetchComments();
 
-    const subscription = supabase
     
   }, [comments]);
 
