@@ -3,6 +3,7 @@
 Submitted by: **Arya Mhaiskar**
 
 This web app: **Share your musical hot takes!**
+Deployed at: https://musical-hottakes.netlify.app/ 
 
 Time spent: **8** hours spent in total
 
@@ -40,6 +41,7 @@ The following **additional** features are implemented:
 ## Video Walkthrough
 
 Here's a walkthrough of implemented user stories:
+![finalRec](https://github.com/amhaiskar0921/final/assets/43621944/db574259-e999-434c-b149-6466de658d3c)
 
 
 <!-- Replace this with whatever GIF tool you used! -->
@@ -55,7 +57,7 @@ Describe any challenges encountered while building the app.
 
 ## License
 
-    Copyright [yyyy] [name of copyright owner]
+    Copyright [2024] [Arya Mhaiskar]
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
