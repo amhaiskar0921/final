@@ -18,7 +18,7 @@ The following **required** functionality is completed:
 - [x] **Users can sort posts by either their created time or upvotes count**
 - [x] **Users can search for posts by title**
 - [x] **A separate post page for each created post, where any additional information is shown is linked whenever a user clicks a post**
-- [ ] **Users can leave comments underneath a post on the post's separate page**
+- [x] **Users can leave comments underneath a post on the post's separate page**
 - [x] **Each post should have an upvote button on the post's page. Each click increases its upvotes count by one and users can upvote any number of times**
 - [x] **A previously created post can be edited or deleted from its post page**
 
@@ -40,7 +40,6 @@ The following **additional** features are implemented:
 ## Video Walkthrough
 
 Here's a walkthrough of implemented user stories:
-![finalproj1](https://github.com/amhaiskar0921/final/assets/43621944/b1a6eaf2-7e6f-4bdf-97fe-536ca9c48d33)
 
 
 <!-- Replace this with whatever GIF tool you used! -->
