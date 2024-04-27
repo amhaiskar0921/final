@@ -3,6 +3,7 @@
 Submitted by: **Arya Mhaiskar**
 
 This web app: **Share your musical hot takes!**
+
 Deployed at: https://musical-hottakes.netlify.app/ 
 
 Time spent: **8** hours spent in total
