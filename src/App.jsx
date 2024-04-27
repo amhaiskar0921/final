@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Create from './components/create';
@@ -15,13 +14,7 @@ function App() {
       <div className="app-container">
         
         <Routes>
-          <Route path="/" element={
-            <>
-            
-              <Display />
-            </>
-          
-          } />
+          <Route path="/" element={<Display />} />
           <Route path="/create" element={<Create />} />
           <Route path="/posts/:id" element={<PostView />} />
           <Route path="/posts/:id/edit" element={<Edit />} />
