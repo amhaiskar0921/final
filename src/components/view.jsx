@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { supabase } from '../client'
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
+import { Navbar, Nav, Form, FormControl, Card, Button } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 
 const PostView = () => {
@@ -45,6 +44,10 @@ const PostView = () => {
   }
 
   return (
+    <div>
+    <Navbar bg="light" expand="lg" className="justify-content-between">
+        <Navbar.Brand href="/">Musical HotTakes</Navbar.Brand>
+      </Navbar>
     <Card className='post-card'>
     <Card.Body>
       <Card.Title>{post.title}</Card.Title>
@@ -57,6 +60,7 @@ const PostView = () => {
       </LinkContainer>
     </Card.Body>
   </Card>
+  </div>
   );
 };
 

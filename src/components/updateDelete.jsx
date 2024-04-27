@@ -1,91 +1,66 @@
 import { useState, useEffect } from 'react';
-import { supabase } from '../client';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
+import { supabase } from '../client'; 
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
 
-import './updateDelete.css';
-
-function Edit() {
+const Edit = () => {
   const { id } = useParams();
-  const [name, setName] = useState('');
-  const [speed, setSpeed] = useState('');
-  const [color, setColor] = useState('');
+  const navigate = useNavigate();
+  const [title, setTitle] = useState('');
+  const [contents, setContents] = useState('');
 
   useEffect(() => {
-    fetchCrewmate();
-  }, []);
+    const fetchPost = async () => {
+      const { data, error } = await supabase
+        .from('posts')
+        .select('*')
+        .eq('id', id)
+        .single();
 
-  async function fetchCrewmate() {
-    const { data, error } = await supabase
-      .from('crewmateData')
-      .select('*')
+      if (error) {
+        console.error('Error fetching post:', error);
+      } else {
+        setTitle(data.title);
+        setContents(data.contents);
+      }
+    };
+
+    fetchPost();
+  }, [id]);
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    const { error } = await supabase
+      .from('posts')
+      .update({ title, contents })
       .eq('id', id);
 
     if (error) {
-      console.error('Error: ', error);
+      console.error('Error updating post:', error);
     } else {
-      setName(data[0].name);
-      setSpeed(data[0].speed);
+      navigate(`/posts/${id}`);
     }
-  }
-
-    async function handleSubmit(event) {
-    event.preventDefault();
-
-    await supabase
-        .from('crewmateData')
-        .update({ name: name, speed: speed, color: color })
-        .eq('id', id);
-
-    window.location = "/gallery";
-    }
-  
-  async function handleDelete() {
-    await supabase
-      .from('crewmateData')
-      .delete()
-      .eq('id', id);
-  
-    window.location = "/gallery";
-  }
-
-  const handleColorChange = (event) => {
-    setColor(event.target.value);
   };
 
   return (
-    <div className='update-delete-card'>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Name:
-          <input type="text" value={name} onChange={e => setName(e.target.value)} required />
-        </label>
-        
-        <label>
-          Speed (mph):
-          <input type="number" value={speed} onChange={e => setSpeed(e.target.value)} required />
-        </label>
+    <Form onSubmit={handleSubmit}>
+      <Form.Group controlId="title">
+        <Form.Label>Title</Form.Label>
+        <Form.Control type="text" value={title} onChange={e => setTitle(e.target.value)} />
+      </Form.Group>
 
-        <fieldset>
-          <legend>Color:</legend>
-          <input type="radio" value="red" checked={color === 'red'} onChange={handleColorChange} />
-          <label>Red</label>
-          <input type="radio" value="yellow" checked={color === 'yellow'} onChange={handleColorChange} />
-          <label>Yellow</label>
-          <input type="radio" value="orange" checked={color === 'orange'} onChange={handleColorChange} />
-          <label>Orange</label>
-          <input type="radio" value="green" checked={color === 'green'} onChange={handleColorChange} />
-          <label>Green</label>
-          <input type="radio" value="blue" checked={color === 'blue'} onChange={handleColorChange} />
-          <label>Blue</label>
-          <input type="radio" value="purple" checked={color === 'purple'} onChange={handleColorChange} />
-          <label>Purple</label>
-      </fieldset>
+      <Form.Group controlId="contents">
+        <Form.Label>Contents</Form.Label>
+        <Form.Control as="textarea" rows={3} value={contents} onChange={e => setContents(e.target.value)} />
+      </Form.Group>
 
-      <button type="submit">Submit</button>
-      </form>
-      <button onClick={handleDelete}>Delete</button>
-    </div>
+      <Button variant="primary" type="submit">
+        Update Post
+      </Button>
+    </Form>
   );
-}
+};
 
 export default Edit;
