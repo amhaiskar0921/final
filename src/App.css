@@ -1,0 +1,36 @@
+.app-container {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+  background-color: black;
+}
+
+.app-sidebar {
+  background-color: gray;
+  width: 150px;
+  height: 100%;
+}
+
+.app-sidebar ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.app-sidebar ul li {
+  padding: 10px;
+}
+
+.app-content {
+  width: 85%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.app-content img {
+  width: 30%;
+  max-width: 500px;
+  height: auto;
+}

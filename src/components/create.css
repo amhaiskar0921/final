@@ -1,0 +1,61 @@
+.create-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 85%;
+}
+
+.create-container img {
+    width: 20vw;
+    max-width: 500px;
+    height: auto;
+  }
+  
+  .create-container form {
+    background-color: gray;
+    border-radius: 10px;
+    padding: 20px;
+    color: white;
+  }
+  
+  .create-container h1 {
+    font-size: 2em;
+    color: white;
+  }
+
+  .create-container form label {
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  .create-container form button {
+    background-color: #a130ec; /* Green */
+    color: white;
+    padding: 5px 5px;
+    text-align: center;
+    display: block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+
+  fieldset {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
+  fieldset div {
+    display: flex;
+    align-items: center;
+  }
+  
+  fieldset input[type="radio"] {
+    margin-right: 0.5em;
+  }
+  
+  fieldset input[type="radio"]:checked {
+    background-color: purple;
+  }
